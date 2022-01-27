@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define SIZE 50
+
+
+bool compare(pair<int,int>a,pair<int,int>b){
+    
+    double x = (double)a.first/(double)a.second;
+    double y = (double)b.first/(double)b.second;
+    
+    return (x>y);
+}
+
+
+
+
+int main(){
+double curr_profit=0;
+double curr_weight=0;
+vector<pair<int,int>>obj={{60,10},{40,40},{100,20},{120,30}}; // obj[{profit1,weight1},{profit2,weight2}...]
+vector<double>x={0,0,0,0,0};
+sort(obj.begin(),obj.end(),compare);
+
+    
+    for (int i = 0; i < obj.size(); i++) {
+        
+        if(obj[i].second+curr_weight<=SIZE){
+            curr_weight+=obj[i].second;
+            curr_profit+=obj[i].first;
+            x[i]=1.0;
+        }
+        else{
+            
+            int remain=SIZE-curr_weight;
+            curr_weight+=remain;
+            curr_profit+= ((double)remain/(double)obj[i].second)*obj[i].first;
+            x[i]=(double)remain/(double)obj[i].second;
+            break;
+            
+        }
+    
+    
+    
+}
+    std::cout << curr_profit << std::endl;
+    
+    for (int i = 0; i < 5; i++) {
+        std::cout<< x[i] <<" | ";
+    }
+}
